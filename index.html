@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+		background-color: #F7EBEC;
+      }
+	  #myCanvas{
+	  	background-color:#ECE1E1;
+	  }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="800" height="600"></canvas>
+    <script>
+
+      function dibujaRectangulo(Rectangulo, contexto) {
+        contexto.beginPath();
+        contexto.rect(Rectangulo.x, Rectangulo.y, Rectangulo.width, Rectangulo.height);
+        contexto.fillStyle = 'blue';
+        contexto.fill();
+        contexto.lineWidth = Rectangulo.borderWidth;
+        contexto.strokeStyle = 'darkblue';
+        contexto.stroke();
+      }
+   
+      var canvas = document.getElementById('myCanvas');
+      var contexto = canvas.getContext('2d');
+
+      var Rectangulo = {
+        x: 10,
+        y: 75,
+        width: 100,
+        height: 50,
+        borderWidth: 5
+      };
+
+      dibujaRectangulo(Rectangulo, contexto);
+	  
+	  Rectangulo.x += 300;
+	  Rectangulo.y += 200;
+	  
+	  
+	  
+	  function animacion(){
+        requestAnimationFrame(animacion);
+		contexto.clearRect(0,0,canvas.width,canvas.height);
+        Rectangulo.x += 10;
+		if (Rectangulo.x == canvas.width){
+			Rectangulo.x = - Rectangulo.width;
+		}
+		dibujaRectangulo(Rectangulo, contexto);
+		
+    }
+	 animacion();
+	 
+     
+    </script>
+  </body>
+</html>
